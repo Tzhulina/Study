@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 /**
- * Created by Татьяна on 24.06.2017.
  * @author Татьяна
- * @see #calculator()
+ * @see #calculator() - Задание 2
+ * @see #stringArray() - Задание 3
  */
 public class Base {
 
@@ -15,21 +15,44 @@ public class Base {
      * @param args
      */
     public static void main(String[] args) {
-        // Создаем объект класса Base
+        // Создание объекта класса Base
         Base programm = new Base();
-        programm.calculator();
+        // Ввод номера задания
+        switch (Integer.parseInt(programm.input("number of task (1 - calculator, 2 - string array)"))) {
+            case 1:
+                // Запуск калькулятора
+                programm.calculator();
+                break;
+            case 2:
+                // Запуск поиска максимального слова в массиве
+                programm.stringArray();
+                break;
+            default:
+                System.out.println("Invalid task number");
+        }
     }
 
     /**
      * Метод для работы калькулятора
      */
-    private void calculator() {
-        // Вводим данные
+    public void calculator() {
+        // Ввод двух чисел и типа операции
         Float firstNum = Float.parseFloat(input("first number").replaceAll(",", "\\."));
         Float secondNum = Float.parseFloat(input("second number").replaceAll(",", "\\."));
         String operation = input("operation");
-        // Выводим результат
+        // Вывод результата
         System.out.printf("Result is: %.4f\n", counting(firstNum, secondNum, operation));
+    }
+
+    public void stringArray() {
+        // Ввод количества слов и самих слов
+        int numOfWords = Integer.parseInt(input("number of words"));
+        String[] words = new String[numOfWords];
+        for (int i = 0; i < numOfWords; i++) {
+            words[i] = input(String.format("%d word", i + 1));
+        }
+        // Поиск и вывод результата
+        printTheLongestWord(words);
     }
 
     /**
@@ -62,8 +85,23 @@ public class Base {
             case "/":
                 return firstNum / secondNum;
             default:
-                System.err.println("Неопознан тип операции");
+                System.err.println("Invalid operation type");
                 return -1f;
         }
+    }
+
+    /**
+     * Поиск и вывод самого длинного слова из массива
+     *
+     * @param words String[] массив слов
+     */
+    public void printTheLongestWord(String[] words) {
+        int index = -1, wordLenght = 0;
+        for (int i = 0; i < words.length; i++) {
+            int currentLenght = words[i].length();
+            index = currentLenght > wordLenght ? i : index;
+            wordLenght = currentLenght > wordLenght ? currentLenght : wordLenght;
+        }
+        System.out.println(String.format("The longest word is \"%s\", it contains %d letters and located in position %d (starts with 1)", words[index], wordLenght, index + 1));
     }
 }
