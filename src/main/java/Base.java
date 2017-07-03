@@ -35,13 +35,14 @@ public class Base {
     /**
      * Метод для работы калькулятора
      */
-    public void calculator() {
+    public void calculator() {                                                      
         // Ввод двух чисел и типа операции
-        Float firstNum = Float.parseFloat(input("first number").replaceAll(",", "\\."));
+        Float firstNum = Float.parseFloat(input("first number").replaceAll(",", "\\."));  //точку можно не экранировать
         Float secondNum = Float.parseFloat(input("second number").replaceAll(",", "\\."));
         String operation = input("operation");
         // Вывод результата
-        System.out.printf("Result is: %.4f\n", counting(firstNum, secondNum, operation));
+        System.out.printf("Result is: %.4f\n", counting(firstNum, secondNum, operation));  //counting(firstNum, secondNum, operation) лучше вынести в переменную. 
+                                                                                           //При ошибке знака у тебя результат все равно будет выводиться. Так не хорошо 
     }
 
     public void stringArray() {
@@ -74,7 +75,7 @@ public class Base {
      * @param operation String символ операции, + - * /
      * @return Float полученный результат операции
      */
-    private Float counting(Float firstNum, Float secondNum, String operation) {
+    private Float counting(Float firstNum, Float secondNum, String operation) {     // а если деление на ноль?
         switch (operation) {
             case "+":
                 return firstNum + secondNum;
