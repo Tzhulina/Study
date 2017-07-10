@@ -9,8 +9,12 @@ public class Task4 {
     public static void main(String[] args) {
         int[] digits = sin(20, -10, 10);
         sout("Generated array of int:", digits);
-        rePlace(digits, getMinIndex(digits), getMaxIndex(digits));
-        sout("Changed array of int:", digits);
+        int imin = getMinIndex(digits);
+        int imax = getMaxIndex(digits);
+        if (imax != -1 && imin != -1) {
+            rePlace(digits, imin, imax);
+            sout("Changed array of int:", digits);
+        }
     }
 
     /**
@@ -65,7 +69,10 @@ public class Task4 {
                 }
             }
         }
-        System.out.println(String.format("Min positiv digit = %s and it is on the position number %s from the beginning (1)", min, index + 1));
+        if (index != -1)
+            System.out.println(String.format("Min positiv digit = %s and it is on the position number %s from the beginning (1)", min, index + 1));
+        else
+            System.out.println("There is no positive items");
         return index;
     }
 
@@ -90,7 +97,10 @@ public class Task4 {
                 }
             }
         }
-        System.out.println(String.format("Max negativ digit = %s and it is on the position number %s from the beginning (1)", max, index + 1));
+        if (index != -1)
+            System.out.println(String.format("Max negativ digit = %s and it is on the position number %s from the beginning (1)", max, index + 1));
+        else
+            System.out.println("There is no negative items");
         return index;
     }
 
