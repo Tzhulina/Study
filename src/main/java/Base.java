@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Base {
 
-    private static Scanner scanner = new Scanner(System.in); // Переменная класса для считывания ввода их консоли
+    private static Scanner scanner = new Scanner(System.in); // Переменная класса для считывания ввода из консоли
 
     /**
      * Начало программы
@@ -35,14 +35,15 @@ public class Base {
     /**
      * Метод для работы калькулятора
      */
-    public void calculator() {                                                      
+    public void calculator() {
         // Ввод двух чисел и типа операции
-        Float firstNum = Float.parseFloat(input("first number").replaceAll(",", "\\."));  //точку можно не экранировать
-        Float secondNum = Float.parseFloat(input("second number").replaceAll(",", "\\."));
+        Float firstNum = Float.parseFloat(input("first number").replaceAll(",", "."));
+        Float secondNum = Float.parseFloat(input("second number").replaceAll(",", "."));
         String operation = input("operation");
         // Вывод результата
-        System.out.printf("Result is: %.4f\n", counting(firstNum, secondNum, operation));  //counting(firstNum, secondNum, operation) лучше вынести в переменную. 
-                                                                                           //При ошибке знака у тебя результат все равно будет выводиться. Так не хорошо 
+        float result = counting(firstNum, secondNum, operation);
+        if (result != -1f)
+            System.out.printf("Result is: %.4f\n", result);
     }
 
     public void stringArray() {
@@ -75,7 +76,7 @@ public class Base {
      * @param operation String символ операции, + - * /
      * @return Float полученный результат операции
      */
-    private Float counting(Float firstNum, Float secondNum, String operation) {     // а если деление на ноль?
+    private Float counting(Float firstNum, Float secondNum, String operation) {
         switch (operation) {
             case "+":
                 return firstNum + secondNum;
@@ -84,11 +85,15 @@ public class Base {
             case "*":
                 return firstNum * secondNum;
             case "/":
-                return firstNum / secondNum;
+                if (secondNum != 0)
+                    return firstNum / secondNum;
+                else
+                    System.err.println("Zero divide");
+                break;
             default:
                 System.err.println("Invalid operation type");
-                return -1f;
         }
+        return -1f;
     }
 
     /**
