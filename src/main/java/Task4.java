@@ -8,20 +8,9 @@ import java.util.Random;
 public class Task4 {
     public static void main(String[] args) {
         int[] digits = sin(20, -10, 10);
-        System.out.println("Generated array of int:");
-        sout(digits);
-
-        int min = getMinIndex(digits);
-        System.out.println(String.format("Min digit = %s and it is on the position number %s from the 1", digits[min], min + 1));
-        int max = getMaxIndex(digits);
-        System.out.println(String.format("Max digit = %s and it is on the position number %s from the 1", digits[max], max + 1));
-
-        int buf = digits[max];
-        digits[max] = digits[min];
-        digits[min] = buf;
-
-        System.out.println("Changed array of int:");
-        sout(digits);
+        sout("Generated array of int:", digits);
+        rePlace(digits, getMinIndex(digits), getMaxIndex(digits));
+        sout("Changed array of int:", digits);
     }
 
     /**
@@ -42,11 +31,13 @@ public class Task4 {
     }
 
     /**
-     * вывод массива на печать
+     * Вывод массива на печать
      *
-     * @param digits
+     * @param message сообщение перед массивом
+     * @param digits массив чисел
      */
-    private static void sout(int[] digits) {
+    private static void sout(String message, int[] digits) {
+        System.out.println(message);
         for (int digit : digits) {
             System.out.print(digit + " ");
         }
@@ -54,32 +45,67 @@ public class Task4 {
     }
 
     /**
-     * Поиск минимума
+     * Поиск минимального положительного элемента
      *
      * @param digits
      * @return индекс минимального элемента в массиве
      */
     private static int getMinIndex(int[] digits) {
-        int min = 0;
-        for (int i = 1; i < digits.length; i++) {
-            if (digits[i] < digits[min])
-                min = i;
+        int min = 0, index = -1;
+        for (int i = 0; i < digits.length; i++) {
+            if (digits[i] > 0) {
+                if (min != 0) {
+                    if (digits[i] < min) {
+                        min = digits[i];
+                        index = i;
+                    }
+                } else {
+                    min = digits[i];
+                    index = i;
+                }
+            }
         }
-        return min;
+        System.out.println(String.format("Min positiv digit = %s and it is on the position number %s from the beginning (1)", min, index + 1));
+        return index;
     }
 
     /**
-     * Поиск максимума
+     * Поиск максимального отрицательного
      *
      * @param digits
      * @return индекс максимального элемента в массиве
      */
     private static int getMaxIndex(int[] digits) {
-        int max = 0;
-        for (int i = 1; i < digits.length; i++) {
-            if (digits[i] > digits[max])
-                max = i;
+        int max = 0, index = -1;
+        for (int i = 0; i < digits.length; i++) {
+            if (digits[i] < 0) {
+                if (max != 0) {
+                    if (digits[i] > max) {
+                        max = digits[i];
+                        index = i;
+                    }
+                } else {
+                    max = digits[i];
+                    index = i;
+                }
+            }
         }
-        return max;
+        System.out.println(String.format("Max negativ digit = %s and it is on the position number %s from the beginning (1)", max, index + 1));
+        return index;
+    }
+
+    /**
+     * Поменять местами 2 элемента массива
+     *
+     * @param digits массив
+     * @param first  индекс первого меняемого
+     * @param second индекс другого меняемого
+     * @return измененный массив
+     */
+    public static int[] rePlace(int[] digits, int first, int second) {
+        digits[first] = digits[first] + digits[second];
+        digits[second] = digits[first] - digits[second];
+        digits[first] = digits[first] - digits[second];
+        return digits;
     }
 }
