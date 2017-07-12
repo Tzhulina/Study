@@ -7,7 +7,7 @@ import NewYearSweetPresent.*;
  */
 public class Task4_Present {
     public static void main(String[] args) {
-        sout(collectSweets());
+        sout(collectSweets()); //sout желательно не использовать, лучше переименовать метод на что-то более звучное
     }
 
     /**
