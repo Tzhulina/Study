@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class Task4 {
     public static void main(String[] args) {
-        int[] digits = sin(20, -10, 10);
+        int[] digits = sin(20, -10, 10); 
         sout("Generated array of int:", digits);
         int imin = getMinIndex(digits);
         int imax = getMaxIndex(digits);
@@ -17,6 +17,7 @@ public class Task4 {
         }
     }
 
+   //надо сменить название метода, так как ежу есть метод java.lang.Math.sin() 
     /**
      * Генерация массива
      *
@@ -29,11 +30,12 @@ public class Task4 {
         Random random = new Random();
         int[] digits = new int[count];
         for (int i = 0; i < digits.length; i++) {
-            digits[i] = random.nextInt(max - min) + min;
+            digits[i] = random.nextInt(max - min) + min; //проверь, будут ли при данной генерации получаться крайние значения -10, 10 
         }
         return digits;
     }
 
+    //есть метод Arrays.toString() который умеет печатать массив
     /**
      * Вывод массива на печать
      *
@@ -55,7 +57,10 @@ public class Task4 {
      * @return индекс минимального элемента в массиве
      */
     private static int getMinIndex(int[] digits) {
-        int min = 0, index = -1;
+        int min = 0, index = -1; //индекс с -1 лучше не начинать. где-то забудешь переприсвоить и exeption поймаешь неожиданно
+                                //количество положительных и отрицательных элементов можно при заполнении массива считать.
+                                //если numberOfPositiveElements не равно не равно размеру массива и numberOfNegativeElements не равно не равно размеру массива,
+                                //то делать вычисления, иначе писать что-то типа You have elements of one sign in array
         for (int i = 0; i < digits.length; i++) {
             if (digits[i] > 0) {
                 if (min != 0) {
@@ -104,6 +109,7 @@ public class Task4 {
         return index;
     }
 
+    //обычно метод, который меняет местами элементы называют swap... можно переименовать на что-то типа swapArrayElements
     /**
      * Поменять местами 2 элемента массива
      *
