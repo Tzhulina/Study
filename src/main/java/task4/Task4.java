@@ -1,3 +1,6 @@
+package task4;
+
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -7,17 +10,16 @@ import java.util.Random;
  */
 public class Task4 {
     public static void main(String[] args) {
-        int[] digits = sin(20, -10, 10); 
-        sout("Generated array of int:", digits);
+        int[] digits = generateDigitsToArray(20, -10, 10);
+        System.out.println("Generated array of int:\n" + Arrays.toString(digits));
         int imin = getMinIndex(digits);
         int imax = getMaxIndex(digits);
         if (imax != -1 && imin != -1) {
-            rePlace(digits, imin, imax);
-            sout("Changed array of int:", digits);
+            swapArrayElements(digits, imin, imax);
+            System.out.println("Changed array of int:\n" + Arrays.toString(digits));
         }
     }
 
-   //надо сменить название метода, так как ежу есть метод java.lang.Math.sin() 
     /**
      * Генерация массива
      *
@@ -26,28 +28,13 @@ public class Task4 {
      * @param max   максимальное значение
      * @return массив чисел
      */
-    private static int[] sin(int count, int min, int max) {
+    private static int[] generateDigitsToArray(int count, int min, int max) {
         Random random = new Random();
         int[] digits = new int[count];
         for (int i = 0; i < digits.length; i++) {
-            digits[i] = random.nextInt(max - min) + min; //проверь, будут ли при данной генерации получаться крайние значения -10, 10 
+            digits[i] = random.nextInt(max - min + 1) + min; //нижнее попадало, а верхняя граница оказывается не входит в диапазон(
         }
         return digits;
-    }
-
-    //есть метод Arrays.toString() который умеет печатать массив
-    /**
-     * Вывод массива на печать
-     *
-     * @param message сообщение перед массивом
-     * @param digits массив чисел
-     */
-    private static void sout(String message, int[] digits) {
-        System.out.println(message);
-        for (int digit : digits) {
-            System.out.print(digit + " ");
-        }
-        System.out.println();
     }
 
     /**
@@ -58,8 +45,8 @@ public class Task4 {
      */
     private static int getMinIndex(int[] digits) {
         int min = 0, index = -1; //индекс с -1 лучше не начинать. где-то забудешь переприсвоить и exeption поймаешь неожиданно
-                                //количество положительных и отрицательных элементов можно при заполнении массива считать.
-                                //если numberOfPositiveElements не равно не равно размеру массива и numberOfNegativeElements не равно не равно размеру массива,
+        //количество положительных и отрицательных элементов можно при заполнении массива считать. - А как их возвращать из метода? только 1 параметр же можно?
+        //если numberOfPositiveElements не равно не равно размеру массива и numberOfNegativeElements не равно не равно размеру массива, - хотелось не делать лишних проходов но массиву
                                 //то делать вычисления, иначе писать что-то типа You have elements of one sign in array
         for (int i = 0; i < digits.length; i++) {
             if (digits[i] > 0) {
@@ -109,7 +96,6 @@ public class Task4 {
         return index;
     }
 
-    //обычно метод, который меняет местами элементы называют swap... можно переименовать на что-то типа swapArrayElements
     /**
      * Поменять местами 2 элемента массива
      *
@@ -118,7 +104,7 @@ public class Task4 {
      * @param second индекс другого меняемого
      * @return измененный массив
      */
-    public static int[] rePlace(int[] digits, int first, int second) {
+    public static int[] swapArrayElements(int[] digits, int first, int second) {
         digits[first] = digits[first] + digits[second];
         digits[second] = digits[first] - digits[second];
         digits[first] = digits[first] - digits[second];

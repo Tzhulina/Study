@@ -1,4 +1,4 @@
-package NewYearSweetPresent;
+package task4.newYearSweetPresent;
 
 /**
  * Created by t.zhulina on 10.07.2017.

@@ -1,4 +1,6 @@
-import NewYearSweetPresent.*;
+package task4;
+
+import task4.newYearSweetPresent.*;
 
 /**
  * Created by t.zhulina on 10.07.2017.
@@ -7,7 +9,7 @@ import NewYearSweetPresent.*;
  */
 public class Task4_Present {
     public static void main(String[] args) {
-        sout(collectSweets()); //sout желательно не использовать, лучше переименовать метод на что-то более звучное
+        printOnScreen(collectSweets());
     }
 
     /**
@@ -63,7 +65,7 @@ public class Task4_Present {
      *
      * @param newYearSweetPresent подарок
      */
-    private static void sout(NewYearSweetPresent[] newYearSweetPresent) {
+    private static void printOnScreen(NewYearSweetPresent[] newYearSweetPresent) {
         System.out.println(String.format("Total weight = %d, total price = %.2f", getTotalWeight(newYearSweetPresent), getTotalPrice(newYearSweetPresent)));
         System.out.println("List of items:");
         for (NewYearSweetPresent item : newYearSweetPresent) {
