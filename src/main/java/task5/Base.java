@@ -19,7 +19,7 @@ public class Base {
         calculator.calculate();
 
         calculator.setFirstNumber("123");
-        calculator.setSecondNumber("877");
+        calculator.setSecondNumber("7");
         calculator.setOperation("сумма");
         calculator.calculate();
 

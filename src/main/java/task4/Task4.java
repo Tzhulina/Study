@@ -32,7 +32,7 @@ public class Task4 {
         Random random = new Random();
         int[] digits = new int[count];
         for (int i = 0; i < digits.length; i++) {
-            digits[i] = random.nextInt(max - min + 1) + min; //нижнее попадало, а верхняя граница оказывается не входит в диапазон(
+            digits[i] = random.nextInt(max - min + 1) + min;
         }
         return digits;
     }
@@ -45,9 +45,12 @@ public class Task4 {
      */
     private static int getMinIndex(int[] digits) {
         int min = 0, index = -1; //индекс с -1 лучше не начинать. где-то забудешь переприсвоить и exeption поймаешь неожиданно
-        //количество положительных и отрицательных элементов можно при заполнении массива считать. - А как их возвращать из метода? только 1 параметр же можно?
-        //если numberOfPositiveElements не равно не равно размеру массива и numberOfNegativeElements не равно не равно размеру массива, - хотелось не делать лишних проходов но массиву
+        //количество положительных и отрицательных элементов можно при заполнении массива считать.
+        // fixme - А как их возвращать из метода? только 1 параметр же можно?
+        //если numberOfPositiveElements не равно не равно размеру массива и numberOfNegativeElements не равно не равно размеру массива,
+        // fixme - хотелось не делать лишних проходов но массиву
                                 //то делать вычисления, иначе писать что-то типа You have elements of one sign in array
+        // fixme подобный вывод есть, например, There is no positive items
         for (int i = 0; i < digits.length; i++) {
             if (digits[i] > 0) {
                 if (min != 0) {

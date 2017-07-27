@@ -6,10 +6,10 @@ public enum OperationsEnum {
     Умножение('*'),
     Деление('/');
 
-    private final Character _value; //с нижнего подчеркивания лучше не начинать
+    private final Character sign;
 
     OperationsEnum(Character value) {
-        _value = value;
+        sign = value;
     }
 
     public static OperationsEnum getOperationEnumFromString(String operationEnumStr) {
@@ -25,12 +25,12 @@ public enum OperationsEnum {
     public static String valuesToString() {
         String values = "";
         for (OperationsEnum operationsEnum : OperationsEnum.values()) {
-            values += String.format("\"%s\" (%s) ", operationsEnum.toString(), operationsEnum._value);
+            values += String.format("\"%s\" (%s) ", operationsEnum.toString(), operationsEnum.sign);
         }
         return values;
     }
 
     public Character getValue() {
-        return _value;
+        return sign;
     }
 }

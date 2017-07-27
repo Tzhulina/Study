@@ -2,7 +2,10 @@ package task5.classes;
 
 import task5.classes.operations.Operation;
 
+import java.util.Scanner;
+
 public class Calculator extends NumberForCalcs {
+    private static Scanner scanner = new Scanner(System.in);
     private NumberForCalcs firstNumber;
     private NumberForCalcs secondNumber;
     private Operation operation;
@@ -15,29 +18,25 @@ public class Calculator extends NumberForCalcs {
     }
 
     public Calculator(String one, String operation, String two) {
-        //Calculator(); Как вызвать тут другой конструктор?
-        //используй this();
-        this.firstNumber = new NumberForCalcs();
-        this.secondNumber = new NumberForCalcs();
-        System.out.println("\n---------- Калькулятор запущен ----------");
+        this();
         setFirstNumber(one);
         setSecondNumber(two);
         setOperation(operation);
     }
 
     public void setFirstNumber() {
-        System.out.println("Ввод первого числа");
-        this.firstNumber.setNumber();
+        System.out.println("Введите первое число: ");
+        this.firstNumber.setNumber(scanner.next());
     }
 
     public void setSecondNumber() {
-        System.out.println("Ввод второго числа");
-        this.secondNumber.setNumber();
+        System.out.println("Введите второе число");
+        this.secondNumber.setNumber(scanner.next());
     }
 
     public void setOperation() {
-        System.out.println("Выбор операции");
-        this.operation = new Operation().setOperation();
+        System.out.println("Введите операцию: ");
+        this.operation = new Operation().setOperation(scanner.next());
     }
 
     public void setFirstNumber(String firstNumber) {
@@ -84,7 +83,9 @@ public class Calculator extends NumberForCalcs {
         if (getFirstNumber() == null || getSecondNumber() == null || getOperation() == null) {
             System.out.println(String.format("Введены не корректные данные для вычисления: "));
             //если несколько условий лучше использовать if-else. тогда, если первый if выпонится, остальные не будут
+            //fixme - здесь задумка вывести все что неправильно, например, если она числа введены неверно то выведется эта информация, то есть зайдет в 2 if
             //кстати, в этом месте можно использовать тернарный оператор логическоеУсловие ? выражение1 : выражение2
+            //fixme - а вместо одного из выражений можно использовать еще один тернарный оператор?
             if (getFirstNumber() == null)
                 System.out.println("  - Некорректное первое число");
             if (getSecondNumber() == null)

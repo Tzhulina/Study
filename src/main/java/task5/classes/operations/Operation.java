@@ -1,33 +1,13 @@
 package task5.classes.operations;
 
-import java.util.Scanner;
-
-//тут тоже, источник получения данных нужно вынести на уровень выше
-//операция не должна знать, откуда к ней приходят данные
 public class Operation implements OperationInterface {
-    private static Scanner scanner = new Scanner(System.in);
     OperationsEnum operation;
 
     public Operation() {
     }
 
-    public Operation setOperation() {
-        System.out.println("Введите операцию: ");
-        this.operation = OperationsEnum.getOperationEnumFromString(scanner.next());
-        return returnCertainOperationClass();
-    }
-
-    public OperationsEnum getOperation() {
-        return operation;
-    }
-
     public Operation setOperation(String operation) {
         this.operation = OperationsEnum.getOperationEnumFromString(operation);
-        return returnCertainOperationClass();
-    }
-
-    public Operation setOperation(OperationsEnum operationsEnum) {
-        this.operation = operationsEnum;
         return returnCertainOperationClass();
     }
 
