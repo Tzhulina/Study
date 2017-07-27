@@ -16,6 +16,7 @@ public class Calculator extends NumberForCalcs {
 
     public Calculator(String one, String operation, String two) {
         //Calculator(); Как вызвать тут другой конструктор?
+        //используй this();
         this.firstNumber = new NumberForCalcs();
         this.secondNumber = new NumberForCalcs();
         System.out.println("\n---------- Калькулятор запущен ----------");
@@ -82,6 +83,8 @@ public class Calculator extends NumberForCalcs {
     public boolean isCalculatable() {
         if (getFirstNumber() == null || getSecondNumber() == null || getOperation() == null) {
             System.out.println(String.format("Введены не корректные данные для вычисления: "));
+            //если несколько условий лучше использовать if-else. тогда, если первый if выпонится, остальные не будут
+            //кстати, в этом месте можно использовать тернарный оператор логическоеУсловие ? выражение1 : выражение2
             if (getFirstNumber() == null)
                 System.out.println("  - Некорректное первое число");
             if (getSecondNumber() == null)
