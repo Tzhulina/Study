@@ -6,7 +6,7 @@ public enum OperationsEnum {
     Умножение('*'),
     Деление('/');
 
-    private final Character _value;
+    private final Character _value; //с нижнего подчеркивания лучше не начинать
 
     OperationsEnum(Character value) {
         _value = value;
