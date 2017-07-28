@@ -1,6 +1,6 @@
-package task5.classes;
+package task7.classes;
 
-import task5.classes.operations.Operation;
+import task7.classes.operations.Operation;
 
 import java.util.Scanner;
 
@@ -12,8 +12,6 @@ public class Calculator extends NumberForCalcs {
     private Float resultOfOperation;
 
     public Calculator() {
-        this.firstNumber = new NumberForCalcs();
-        this.secondNumber = new NumberForCalcs();
         System.out.println("\n---------- Калькулятор запущен ----------");
     }
 
@@ -26,17 +24,17 @@ public class Calculator extends NumberForCalcs {
 
     public void setFirstNumber() {
         System.out.println("Введите первое число: ");
-        this.firstNumber.setNumber(scanner.next());
+        setFirstNumber(scanner.next());
     }
 
     public void setSecondNumber() {
         System.out.println("Введите второе число");
-        this.secondNumber.setNumber(scanner.next());
+        setSecondNumber(scanner.next());
     }
 
     public void setOperation() {
         System.out.println("Введите операцию: ");
-        this.operation = new Operation().setOperation(scanner.next());
+        setOperation(scanner.next());
     }
 
     public Float getFirstNumber() {
@@ -44,6 +42,7 @@ public class Calculator extends NumberForCalcs {
     }
 
     public void setFirstNumber(String firstNumber) {
+        this.firstNumber = new NumberForCalcs();
         this.firstNumber.setNumber(firstNumber);
         System.out.println(String.format("Ввод первого числа [%.4f]", this.getFirstNumber()));
     }
@@ -53,6 +52,7 @@ public class Calculator extends NumberForCalcs {
     }
 
     public void setSecondNumber(String secondNumber) {
+        this.secondNumber = new NumberForCalcs();
         this.secondNumber.setNumber(secondNumber);
         System.out.println(String.format("Ввод второго числа [%.4f]", this.getSecondNumber()));
     }
@@ -82,10 +82,6 @@ public class Calculator extends NumberForCalcs {
     public boolean isCalculatable() {
         if (getFirstNumber() == null || getSecondNumber() == null || getOperation() == null) {
             System.out.println(String.format("Введены не корректные данные для вычисления: "));
-            //если несколько условий лучше использовать if-else. тогда, если первый if выпонится, остальные не будут
-            //fixme - здесь задумка вывести все что неправильно, например, если она числа введены неверно то выведется эта информация, то есть зайдет в 2 if
-            //кстати, в этом месте можно использовать тернарный оператор логическоеУсловие ? выражение1 : выражение2
-            //fixme - а вместо одного из выражений можно использовать еще один тернарный оператор?
             if (getFirstNumber() == null)
                 System.out.println("  - Некорректное первое число");
             if (getSecondNumber() == null)
@@ -98,8 +94,11 @@ public class Calculator extends NumberForCalcs {
     }
 
     private void printResults() {
-        if (getResultOfOperation() == null) {
-        } else
+        try {
             System.out.println(String.format("%.4f %s %.4f = %.4f", getFirstNumber(), getOperation().getSign(), getSecondNumber(), getResultOfOperation()));
+        } catch (NullPointerException e) {
+            System.out.println("Нет результата вычислений");
+            e.printStackTrace();
+        }
     }
 }

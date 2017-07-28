@@ -16,6 +16,5 @@ public class OperationDivision extends Operation {
         else
             System.err.println("Деление на ноль");
         return null;
-
     }
 }
