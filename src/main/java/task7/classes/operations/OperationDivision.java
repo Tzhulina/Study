@@ -11,7 +11,7 @@ public class OperationDivision extends Operation {
 
     @Override // fixme не получится обрабатывать тут исключения тк float их не даст, будет получаться бесконечность
     public Float countResult(Float one, Float two) {
-        if (two != 0)
+        if (two != 0f)
             return one / two;
         else
             System.out.println("Деление на ноль");

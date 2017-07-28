@@ -80,11 +80,11 @@ public class Calculator extends NumberForCalcs {
     }
 
     public boolean isCalculatable() {
-        if (getFirstNumber() == null || getSecondNumber() == null || getOperation() == null) {
+        if (getFirstNumber() == null || getSecondNumber() == null || getOperation() == null || (getOperation() != null && getOperation().getName().equalsIgnoreCase("Деление") & getSecondNumber() == 0.0f)) {
             System.out.println(String.format("Введены не корректные данные для вычисления: "));
             if (getFirstNumber() == null)
                 System.out.println("  - Некорректное первое число");
-            if (getSecondNumber() == null)
+            if (getSecondNumber() == null || (getOperation() != null && getOperation().getName().equalsIgnoreCase("Деление") & getSecondNumber() == 0.0f))
                 System.out.println("  - Некорректное второе число");
             if (getOperation() == null)
                 System.out.println("  - Некорректная операция");
@@ -95,9 +95,11 @@ public class Calculator extends NumberForCalcs {
 
     private void printResults() {
         try {
-            System.out.println(String.format("%.4f %s %.4f = %.4f", getFirstNumber(), getOperation().getSign(), getSecondNumber(), getResultOfOperation()));
-        } catch (NullPointerException e) {
-            System.out.println("Нет результата вычислений");
+            if (getResultOfOperation() == null) {
+                System.out.println("Нет результата вычислений");
+            } else
+                System.out.println(String.format("%.4f %s %.4f = %.4f", getFirstNumber(), getOperation().getSign(), getSecondNumber(), getResultOfOperation()));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
